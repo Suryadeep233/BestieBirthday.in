@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BestieBirthday.in 🎉</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(to bottom, #ffd6ec, #c6f2ff);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background-color: #fff0f5;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    nav button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    nav button:hover {
+      transform: scale(1.1);
+      background-color: #ff1493;
+    }
+
+    section {
+      display: none;
+      padding: 2rem;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    .countdown {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ff1493;
+      animation: popIn 1s ease-in-out infinite alternate;
+    }
+
+    .memory-lane img {
+      max-width: 200px;
+      border-radius: 10px;
+      margin: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .memory-lane img:hover {
+      transform: rotate(-2deg) scale(1.05);
+    }
+
+    .quote-card {
+      background: white;
+      margin: 1rem auto;
+      padding: 1rem;
+      max-width: 400px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+
+    .letter-box {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border: 2px dashed #ffb3d1;
+      background-image: url('https://i.pinimg.com/originals/2a/e7/0e/2ae70ed68b5b8373df9f3c576679cbfa.gif');
+      background-size: cover;
+      color: black;
+    }
+
+    .letter-text {
+      font-size: 20px;
+      line-height: 2;
+      font-family: 'Pacifico', cursive;
+    }
+
+    #cakePage #cake {
+      width: 120px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .layer {
+      height: 50px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .layer1 { background: #ffb6c1; }
+    .layer2 { background: #ff69b4; }
+    .layer3 { background: #ff1493; }
+
+    .candle {
+      width: 10px;
+      height: 30px;
+      background: #fff;
+      margin: 0 auto;
+      border-radius: 2px;
+      position: relative;
+      top: -10px;
+    }
+
+    .flame {
+      width: 8px;
+      height: 12px;
+      background: gold;
+      border-radius: 50%;
+      position: absolute;
+      top: -14px;
+      left: 1px;
+      animation: flicker 0.2s infinite;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #cakePage #cutBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background: pink;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #cakePage #message {
+      font-size: 24px;
+      margin-top: 30px;
+      color: #c71585;
+      display: none;
+    }
+
+    .balloon {
+      width: 40px;
+      height: 60px;
+      background: red;
+      border-radius: 50% 50% 45% 45%;
+      position: absolute;
+      bottom: -100px;
+      animation: float 6s ease-in infinite;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 30px;
+      background: black;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    #birthday-surprise {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+  }
+
+  .stack-container {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+    transition: transform 0.2s ease, border-radius 0.2s ease;
+    background-color: #fff;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  #message {
+    display: none;
+    font-size: 40px;
+    color: #000000;
+    margin-top: 20px;
+    font-family: Pacifico;
+    font-weight: bold;
+    animation: sparkles 1.5s ease-in-out infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes sparkles {
+    0% { opacity: 0; }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 0; }
+  }
+
+  .sparkles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: url('https://www.pngall.com/wp-content/uploads/2017/04/Sparkle-Transparent.png') no-repeat center;
+    background-size: contain;
+    animation: sprinkleAnimation 1.5s infinite;
+  }
+
+  @keyframes sprinkleAnimation {
+    0% { opacity: 0; transform: scale(1) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+    100% { opacity: 0; transform: scale(1) rotate(0deg); }
+  }
+
+  .memory-lane {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* thoda space beech mein */
+}
+
+.memory-item {
+  text-align: center;
+}
+
+.home {
+  width: 300px;
+  aspect-ratio: 3 / 4;
+  border-radius: 20px;
+  border: 6px dashed #ff90b3;
+  padding: 10px;
+  background: linear-gradient(135deg, #ffe2ec, #ffc3a0);
+  box-shadow: 0 8px 20px rgba(255, 144, 179, 0.4);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('Assets/Picsart_25-04-18_14-52-28-609.png'); /* image ka naam yaha dalna */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Poppins', sans-serif; /* optional */
+}
+
+.text {
+    background: rgb(255, 0, 0);
+    margin: 1rem auto;
+    padding: 1rem;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    font-size: 1.2rem;
+    font-style: italic;
+    background: linear-gradient(135deg, #ffe2ec, #ffc3a0);
+    box-shadow: 0 8px 20px rgba(255, 144, 179, 0.4);
+}
+
+  </style>
+</head>
+<body>
+  <section id="countdown" class="active">
+    <h1 class="text">Birthday Countdown 🎉</h1>
+    <div class="countdown" id="timer">5</div>
+  </section>
+
+  <nav style="display: none" id="navBar">
+    <button onclick="showPage('birthday-surprise')">birthday surprise</button>
+    <button onclick="showPage('cakePage')">Cut Cake</button>
+    <button onclick="showPage('homepage')">Home</button>
+    <button onclick="showPage('memory-lane')">Memory Lane</button>
+    <button onclick="showPage('quotes')">Quotes</button>
+    <button onclick="showPage('letter')">Letter</button>
+  </nav>
+  
+  <section id="birthday-surprise">
+    <h2 class="text">✨ Swipe these images 💖</h2>
+  
+    <div class="stack-container" id="stack">
+      <div class="card"><img src="Assets/6.jpg" alt="img6"></div>
+      <div class="card"><img src="Assets/5.jpg" alt="img5"></div>
+      <div class="card"><img src="Assets/4.jpg" alt="img4"></div>
+      <div class="card"><img src="Assets/3.jpg" alt="img3"></div>
+      <div class="card"><img src="Assets/2.jpg" alt="img2"></div>
+      <div class="card"><img src="Assets/1.jpg" alt="img1"></div>
+    </div>
+  
+    <div id="message" class="text">🎀 Good Girl 🎀</div>
+    <div id="sprinkles" class="sparkles"></div>
+  </section>
+  
+
+  <section id="cakePage">
+    <h2 class="text">🎂 Time to Cut the Cake 🎂</h2>
+    <div id="cake">
+      <div class="candle"><div class="flame"></div></div>
+      <div class="layer layer1"></div>
+      <div class="layer layer2"></div>
+      <div class="layer layer3"></div>
+    </div>
+    <button id="cutBtn">Cut Cake</button>
+    <div id="message">Happy Birthday cutieeee🎀🎀😽</div>
+  </section>
+
+  <section id="homepage">
+    <h1 class="text">Welcome to BestieBirthday 🎂</h1>
+    <p class="text">One of the kindest souls I know is turning a year cooler 🎉</p>
+    <img class="home" src="Assets/home.jpg" width="300">
+  </section>
+
+  <section id="memory-lane">
+    <h2 class="text">📸 Memory Lane</h2>
+    <div class="memory-lane">
+      <div class="memory-item">
+        <img src="Assets/cuteeeeee.jpg" alt="Cute Memory" width="500">
+        <h3 class="text">Cute Memory</h3>
+      </div>
+  
+      <div class="memory-item">
+        <img src="Assets/funnnnnnnnn.jpg" alt="Fun Memory" width="500" height="355">
+        <h3 class="text">Fun Memory</h3>
+      </div>
+    </div>
+    <p class="text">Your smile brightens my day <3</p>
+    <p class="text">Bestfriends who slay together, stay together.</p>
+  </section>
+  
+
+  <section id="quotes">
+    <h2 class="text">💬 Lines for you 💞</h2>
+    <div class="quote-card">You’re a human sunshine.✨✨</div>
+    <div class="quote-card">Main toh bas ye kehna chahta hoon… tu cool hai fr.</div>
+    <div class="quote-card">If you were a fruit, you'd be a fine-apple😉😉</div>
+    <div class="quote-card">I find the most beautiful moments of life aren't just with you but because of you.🥺🤗💕</div>
+  </section>
+
+  <section id="letter">
+    <h2 class="text">💌 A Little Birthday Note 💌</h2>
+    <div class="letter-box">
+      <p class="letter-text">
+        Thanks for being in my life. You're legit awesome. <br>
+        I will write about you so deeply in my words<br>
+        that the one who reads it, will beg to see you.🥹✨<br>
+        Happy Birthday once again to the person who is reading this!<br>
+      </p>
+      <div style="font-size: 2rem;">❤️💗💗🎀🫶🫶💞😉🫂</div>
+    </div>
+  </section>
+
+  <script>
+    let countdown = 5;
+    const timer = document.getElementById('timer');
+
+    const interval = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        clearInterval(interval);
+        document.getElementById('countdown').style.display = 'none';
+        document.getElementById('navBar').style.display = 'flex';
+        showPage('homepage');
+        const audio = new Audio('https://cdn.pixabay.com/audio/2022/08/19/audio_3ba41daed1.mp3');
+        audio.loop = true;
+        audio.play();
+      } else {
+        timer.textContent = countdown;
+      }
+    }, 1000);
+
+    function showPage(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    const btn = document.getElementById('cutBtn');
+    const msg = document.getElementById('message');
+
+    btn.addEventListener('click', () => {
+      msg.style.display = 'block';
+      for (let i = 0; i < 20; i++) {
+        createBalloon();
+      }
+    });
+
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+      document.body.appendChild(balloon);
+      setTimeout(() => balloon.remove(), 7000);
+    }
+
+    const stack = document.getElementById('stack');
+  const cards = Array.from(stack.querySelectorAll('.card'));
+  let activeCard = null;
+  let startX = 0;
+  let currentIndex = 0;
+
+  function startDrag(x, card) {
+    activeCard = card;
+    startX = x;
+    card.style.transition = 'none';
+    card.style.borderRadius = '40px';
+    card.style.transform = 'scale(1.03)';
+  }
+
+  function moveDrag(x) {
+    if (!activeCard) return;
+    const dx = x - startX;
+    activeCard.style.transform = `translateX(${dx}px) rotate(${dx * 0.05}deg) scale(1.03)`;
+  }
+
+  function endDrag(x) {
+    if (!activeCard) return;
+    const dx = x - startX;
+    activeCard.style.transition = 'transform 0.3s ease';
+    if (Math.abs(dx) > 100) {
+      activeCard.style.transform = `translateX(${dx > 0 ? '1000px' : '-1000px'}) rotate(${dx * 0.1}deg)`;
+      currentIndex++;
+      if (currentIndex === cards.length) {
+        setTimeout(() => {
+          document.getElementById('message').style.display = 'block';
+          document.getElementById('sprinkles').style.display = 'block'; // Show sprinkles
+          // After the effect is shown, hide the cards and message
+          setTimeout(() => {
+            stack.style.display = 'none';  // Hide the images after the surprise
+            document.getElementById('message').style.display = 'none'; // Hide the "You're a Cutie" text
+          }, 3000); // Adjust timing if needed
+        }, 400);
+      }
+    } else {
+      activeCard.style.transform = 'translateX(0) scale(1)';
+      activeCard.style.borderRadius = '20px';
+    }
+    activeCard = null;
+  }
+
+  cards.forEach(card => {
+    // Touch Events
+    card.addEventListener('touchstart', e => startDrag(e.touches[0].clientX, card));
+    card.addEventListener('touchmove', e => moveDrag(e.touches[0].clientX));
+    card.addEventListener('touchend', e => endDrag(e.changedTouches[0].clientX));
+
+    // Mouse Events
+    card.addEventListener('mousedown', e => startDrag(e.clientX, card));
+    document.addEventListener('mousemove', e => moveDrag(e.clientX));
+    document.addEventListener('mouseup', e => endDrag(e.clientX));
+  });
+
+  
+
+  </script>
+</body>
+</html>
